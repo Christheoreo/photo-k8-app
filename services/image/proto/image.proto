@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package image;
+
+option go_package = "github.com/christheoreo/photo-k8-app/image/proto";
+
+service ImageService {
+  rpc ProcessImage (ProcessImageRequest) returns (ProcessImageResponse);
+}
+
+message ProcessImageRequest {
+  bytes image_data = 1;
+  string operation = 2;
+}
+
+message ProcessImageResponse {
+  bytes image_data = 1;
+  bool success = 2;
+  string error = 3;
+}

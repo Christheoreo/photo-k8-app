@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: image
+  namespace: photo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: image
+  template:
+    metadata:
+      labels:
+        app: image
+    spec:
+      containers:
+      - name: image
+        image: ghcr.io/christheoreo/photo-k8-app/image:34172f6cb2e903f5cb293b69e26c00f285562bfa
+        ports:
+        - containerPort: 50051
+        # env:
+        # - name: DATABASE_URL
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: image-secret
+        #       key: database-url
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: image
+  namespace: photo-app
+spec:
+  selector:
+    app: image
+  ports:
+  - port: 50051
+    targetPort: 50051
