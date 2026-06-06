@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+  namespace: photo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+      - name: api
+        image: ghcr.io/christheoreo/photo-k8-app/api:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: api-secret
+              key: database-url
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api
+  namespace: photo-app
+spec:
+  selector:
+    app: api
+  ports:
+  - port: 3000
+    targetPort: 3000
