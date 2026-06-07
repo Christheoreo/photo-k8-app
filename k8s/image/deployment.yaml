@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: image-worker
-        image: ghcr.io/christheoreo/photo-k8-app/image-worker:bc1b500f263d1bee5b056e62b6064170bf65cd39
+        image: ghcr.io/christheoreo/photo-k8-app/image-worker:e4d2bf468850cded7d50b352f9ed8048f47a7a81
         env:
         - name: DATABASE_URL
           valueFrom:
