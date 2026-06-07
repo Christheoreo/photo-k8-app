@@ -28,6 +28,18 @@ spec:
           value: "3001"
         - name: NODE_ENV
           value: "production"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 10
         volumeMounts:
         - name: auth-keys
           mountPath: /app/keys
