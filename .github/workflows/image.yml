@@ -33,12 +33,12 @@ jobs:
           context: services/image
           push: true
           tags: |
-            ghcr.io/christheoreo/photo-k8-app/image:latest
-            ghcr.io/christheoreo/photo-k8-app/image:${{ github.sha }}
+            ghcr.io/christheoreo/photo-k8-app/image-worker:latest
+            ghcr.io/christheoreo/photo-k8-app/image-worker:${{ github.sha }}
 
       - name: Update k8s manifest with new image tag
         run: |
-          sed -i "s|ghcr.io/christheoreo/photo-k8-app/image:.*|ghcr.io/christheoreo/photo-k8-app/image:${{ github.sha }}|" k8s/image/deployment.yaml
+          sed -i "s|ghcr.io/christheoreo/photo-k8-app/image-worker:.*|ghcr.io/christheoreo/photo-k8-app/image-worker:${{ github.sha }}|" k8s/image/deployment.yaml
 
       - name: Commit and push manifest update
         run: |
