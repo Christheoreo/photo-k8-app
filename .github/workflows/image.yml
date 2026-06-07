@@ -7,10 +7,6 @@ on:
     paths:
       - 'services/image/**'
 
-concurrency:
-  group: manifest-update
-  cancel-in-progress: false
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -50,4 +46,9 @@ jobs:
           git config user.email "github-actions@github.com"
           git add k8s/image/deployment.yaml
           git commit -m "chore: update IMAGE image to ${{ github.sha }}"
-          git push
+          
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin main && git push && break
+            echo "Push failed, retrying in 5s... (attempt $i)"
+            sleep 5
+          done
