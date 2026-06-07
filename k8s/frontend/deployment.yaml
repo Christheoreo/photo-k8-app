@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: ghcr.io/christheoreo/photo-k8-app/frontend:cd24eb9b512ecb7b25db77548ffe557b925885a0
+        image: ghcr.io/christheoreo/photo-k8-app/frontend:2ac212011a9c75c3dea4671fc533a65fdccd36c6
         ports:
         - containerPort: 80
 ---
