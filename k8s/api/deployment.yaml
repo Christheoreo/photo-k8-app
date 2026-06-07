@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: api
-        image: ghcr.io/christheoreo/photo-k8-app/api:e4d2bf468850cded7d50b352f9ed8048f47a7a81
+        image: ghcr.io/christheoreo/photo-k8-app/api:10d7ffe88644d3d8be5c2e8cb3feaa726651295e
         ports:
         - containerPort: 3000
         env:
