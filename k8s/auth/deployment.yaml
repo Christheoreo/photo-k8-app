@@ -26,6 +26,16 @@ spec:
               key: database-url
         - name: PORT
           value: "3001"
+        - name: NODE_ENV
+          value: "production"
+        volumeMounts:
+        - name: auth-keys
+          mountPath: /app/keys
+          readOnly: true
+      volumes:
+      - name: auth-keys
+        secret:
+          secretName: auth-keys
 ---
 apiVersion: v1
 kind: Service

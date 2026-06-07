@@ -24,6 +24,8 @@ spec:
             secretKeyRef:
               name: api-secret
               key: database-url
+        - name: NODE_ENV
+          value: "production"
 ---
 apiVersion: v1
 kind: Service
