@@ -1,23 +1,20 @@
-import { NestFactory } from '@nestjs/core'
-import { AppModule } from './app.module'
-import { db } from './database/database'
 import { Migrator, FileMigrationProvider } from 'kysely/migration'
+import { db } from './database'
 import * as path from 'path'
 import { promises as fs } from 'fs'
 
-async function bootstrap() {
-
-   // Run migrations before starting the app
+async function migrate() {
   const migrator = new Migrator({
     db,
     provider: new FileMigrationProvider({
       fs,
       path,
-      migrationFolder: path.join(__dirname, 'database/migrations'),
+      migrationFolder: path.join(__dirname, 'migrations'),
     }),
   })
 
   const { error, results } = await migrator.migrateToLatest()
+
   results?.forEach(result => {
     if (result.status === 'Success') {
       console.log(`migration ${result.migrationName} ran successfully`)
@@ -27,10 +24,11 @@ async function bootstrap() {
   })
 
   if (error) {
-    console.error('failed to run migrations:', error)
+    console.error('migration failed:', error)
     process.exit(1)
   }
-  const app = await NestFactory.create(AppModule);
-  await app.listen(process.env.PORT ?? 3000);
+
+  await db.destroy()
 }
-bootstrap();
+
+migrate()
