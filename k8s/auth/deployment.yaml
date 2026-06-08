@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: auth
-        image: ghcr.io/christheoreo/photo-k8-app/auth:ddc078d96227c45dfe9ea9f76ce171107ad8103d
+        image: ghcr.io/christheoreo/photo-k8-app/auth:da0f7de9914587c33d1d510b7a2f45a322aa0fe4
         ports:
         - containerPort: 3001
         env:
