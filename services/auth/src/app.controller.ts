@@ -17,4 +17,10 @@ export class AppController {
   getHealth(): Record<string, string> {
     return { status: 'ok' };
   }
+
+  @Public()
+  @Get('walter')
+  getWalter(): Record<string, string> {
+    return { status: 'Walter is awesome' };
+  }
 }
